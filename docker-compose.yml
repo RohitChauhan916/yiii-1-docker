@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  mysql:
+    image: mariadb
+    volumes: 
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: m4agri 
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+      TZ: Asia/Kolkata
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8060:80
+    environment:
+      - UPLOAD_LIMIT=1G
+      - PMA_ARBITRARY=1
+      
+    restart: always
+
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"  
+    volumes:
+      - .:/var/www/html       
+    command: /bin/sh -c "service apache2 start && while sleep 1000; do :; done"
