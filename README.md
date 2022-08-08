@@ -9,6 +9,7 @@ Use the docker compose file [docker](https://www.docker.com/) to install yii1 de
 ```bash
 docker compose up
 ```
+Please add this file in root folder of your project to run properly
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
